@@ -132,7 +132,8 @@ public class Java13 extends HttpServlet {
                 list.append("<li>" + i + "</li>\n");
             }
 
-            list.append("</ul\n");
+            list.append("</ul>\n");
+            list.append("<hr>\n");
         }
 
         return list.toString();
