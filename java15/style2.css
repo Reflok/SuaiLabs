@@ -1,0 +1,17 @@
+h1 {
+    color: red;
+}
+
+h4 {
+    background-color: green;
+    color: yellow;
+}
+
+a {
+    color: black;
+    background-color: pink;
+}
+
+.indent {
+	text-indent: 25px;
+}

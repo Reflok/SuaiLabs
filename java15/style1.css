@@ -1,0 +1,17 @@
+h1 {
+    color: darkslategray;
+}
+
+h4 {
+    background-color: aquamarine;
+    color: dimgray;
+}
+
+a {
+    color: darkorange;
+    background-color: cornflowerblue;
+}
+
+.indent {
+	text-indent: 25px;
+}

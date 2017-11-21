@@ -1,0 +1,9 @@
+
+squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(§œ×ä8¬¯‡©ú+
+Dsquid:S1989"(Add a "try/catch" block for "getWriter".(çûˆş8‹‰Ó§ú+
+Fsquid:S00108")Either remove or fill this block of code.(ŞÙ»8”ì–¨ú+
+Gsquid:S1989"&Add a "try/catch" block for "forward".(ÜÕˆêøÿÿÿÿ8¾™Ü¬ú+
+Ksquid:S00108")Either remove or fill this block of code.(óÖ¥Êşÿÿÿÿ8ßÄƒ©ú+
+Gsquid:S1989"&Add a "try/catch" block for "forward".(ÜÕˆêøÿÿÿÿ8¾™Ü¬ú+
+Xsquid:UnusedPrivateMethod")Remove this unused private "save" method.(ú¶˜¢şÿÿÿÿ8Šé”¨ú+
+Xsquid:UnusedPrivateMethod")Remove this unused private "load" method.(´·²ûøÿÿÿÿ8Šé”¨ú+

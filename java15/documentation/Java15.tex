@@ -1,0 +1,165 @@
+\documentclass{article}
+\usepackage[english,russian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{indentfirst}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[margin=2cm]{geometry}
+
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+    	ГУАП
+    	\vspace{0.25cm}
+
+    	КАФЕДРА №51
+	\end{center}
+
+    \begin{flushleft}
+
+    	ОТЧЕТ
+
+    	ЗАЩИЩЕН С ОЦЕНКОЙ
+
+		ПРЕПОДАВАТЕЛЬ 
+
+
+    	\vspace{0.5cm} 
+
+		$\rule{5cm}{0.15mm}$ \hfill $\rule{2.2cm}{0.15mm}$  \hfill $\rule{3.25cm}{0.15mm}$
+
+		должность, уч. степень, звание \hfill подпись, дата \hfill инициалы, фамилия
+    \end{flushleft}
+    
+ 	
+    \hspace{2cm}
+
+	\begin{center}
+    	ОТЧЕТ ПО ЛАБОРАТОРНОЙ РАБОТЕ №15
+
+
+    	\vspace{1cm}
+
+    	HttpSession. CSS
+
+
+    	\vspace{1cm}
+
+    	по курсу: ОСНОВЫ ПРОГРАММИРОВАНИЯ {\MakeUppercase{\romannumeral 2}}
+    \end{center}
+
+    \vspace{3cm}
+
+    \begin{flushleft}
+    	РАБОТУ ВЫПОЛНИЛ
+
+    	СТУДЕНТ ГР. № 5511 \hfill $\rule{2.2cm}{0.15mm}$  \hfill $\rule{3.25cm}{0.15mm}$
+
+    	\hspace{7.8cm} подпись, дата \hfill инициалы, фамилия
+    \end{flushleft}
+
+	\vspace{5cm}   
+	\begin{center}
+ 		Санкт-Петербург 2017
+	\end{center}
+\end{titlepage}
+
+\section{Задание}
+Реализовать сервлет для организации доски объявлений. Объявление содержит текст и заголовок (время размещения и имя пользователя).
+
+Для того, чтобы разместить, необходимо ввести логин и пароль (пройти аутентификацию). При старте сервлет загружает базу пользователей и их паролей из текстового файла. Просматривать объявления можно без аутентификации (ввода логина и пароля).
+
+На главной странице находится ссылка “войти в систему” и показывается список объявлений. После входа в систему добавляются ссылки: “выйти из системы”, “добавить объявление”. 
+Для аутентификации необходимо использовать класс HttpSession
+Для перенаправления пользователя на другую страницу и включения в  страницу готов кусков html кода можно воспользоваться классом RequestDispatcher
+Протестировать, что при очистке cookie в браузере, пользователь выходит из системы.
+
+Между перезагрузками сервера (рестарт Tomcat) список объявлений можно не сохранять.
+
+Дополнительные требования (CSS):
+
+
+\begin{enumerate}
+	\item Оформление страницы должны быть задано в отдельном файле style.css
+	\item Должны быть созданы три стиля:
+
+	\begin{enumerate}
+	\item Заголовк объявления 
+	\item Текст объявления
+	\item Ссылка с командой  (“войти в систему”, “выйти из системы”, “добавить объявления”)
+	\end{enumerate}
+	\item В работе должно быть два варианта оформления (переключение --- переименованием файлов на сервере)
+\end{enumerate}
+
+\section{Дополнительное задание}
+Добавить ссылку "Ответить на объявление" для кажого объявления. Ответы выводятся под объявлением со смещением вправо. Отвечать на ответ нельзя. Отвечать могут только вошедшие пользователи.
+
+\section{Реализация}
+Программа реализована с использованием контейнера сервлетов Apache Tomcat.
+
+Главный класс программы наследуется от класса HttpServlet и в методе doGet() в зависимости от запроса генерирует соответствующий ответ в виде HTML файла.
+Свзязь сервлета с URL определена в файле web.xml.
+Информация о зарегистрированных хранится в текстовом файле. Данные загружаются из файла в методе init() сервлета и сохраняются в него в методе destroy().
+Для вывода форм и списков используется класс RequestDispatcher и его метод include(). 
+Используются куки, так что дважды вводить логин и пароль не требуется.
+
+\section{Инструкция}
+После запуска сервера при посещении страницы localhost:8080/java15/main перед пользователем откроется форма для ввода логина или пароля, ссылка на просмотр объявлений и ссылка на страницу регистрации. После ввода корректных логина и пароля, или если вход был выполнен ранее, пользователь переходит на страницу с объявлениями. Там он может отставить новое объявление или ответить на уже существующее.
+
+\section{Тестирование}
+
+\subsection{Главная страница}
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{login.jpg}}
+		\caption{Ввод логина и пароля}
+	\end{flushleft}
+\end{figure}
+
+\subsection{Регистрация}
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{register.jpg}}
+		\caption{Ввод логина и пароля для регистрации}
+	\end{flushleft}
+\end{figure}
+
+\subsection{Создание нового объявления}
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{newpost.jpg}}
+		\caption{Форма для создания объявления}
+	\end{flushleft}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{posted.jpg}}
+		\caption{Новое объявление появилось в списке}
+	\end{flushleft}
+\end{figure}
+
+\subsection{Ответ на объявление}
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{response.jpg}}
+		\caption{Форма для создания ответа на объявление}
+	\end{flushleft}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{responded.jpg}}
+		\caption{Ответ появился под объявлением}
+	\end{flushleft}
+\end{figure}
+
+\subsection{Проверка очистки cookie}
+\begin{figure}[H]
+	\begin{flushleft}
+		\centerline{\includegraphics[scale=0.6]{cookie.jpg}}
+		\caption{После очистки cookie снова требуется ввести логин и пароль}
+	\end{flushleft}
+\end{figure}
+
+\end{document}
