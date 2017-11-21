@@ -41,6 +41,7 @@ public class ServerUDP implements Runnable, Chat {
 			while (true) {
 				if (exit) {
 					closeSocket();
+					break;
 				}
 
 				socket.receive(packet);

@@ -8,20 +8,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /*
-Реализовать сервлет для работы с записной книжкой. В записной книжке для каждого человека хранится его имя и список
-телефонов (их может быть несколько). При старте сервлет загружает записную книжку из текстового файла. Сервлет должен
-позволять:
-Просматривать список записей
-Добавить нового пользователя
-Добавить новый телефон
+    Реализовать сервлет для работы с записной книжкой. В записной книжке для каждого человека хранится его имя и список
+    телефонов (их может быть несколько). При старте сервлет загружает записную книжку из текстового файла. Сервлет должен
+    позволять:
+    Просматривать список записей
+    Добавить нового пользователя
+    Добавить новый телефон
 
-На главной странице сервлет находится список записей. Вверху страницы ссылки --- добавить. Каждая из ссылок ведет на
-отдельную страницу, где с помощью элементов <input type="text" name="username" /> в форме вводятся необходимые данные.
-Для отправки данных сервлету есть кнопка submit.
+    На главной странице сервлет находится список записей. Вверху страницы ссылки --- добавить. Каждая из ссылок ведет на
+    отдельную страницу, где с помощью элементов <input type="text" name="username" /> в форме вводятся необходимые данные.
+    Для отправки данных сервлету есть кнопка submit.
 
-В качестве контейнера сервлетов рекомендуется использовать либо сервер Tomcat, либо сервер Jetty
+    В качестве контейнера сервлетов рекомендуется использовать либо сервер Tomcat, либо сервер Jetty
 
-NB: Синхронизация при работе нескольких пользователей с одной записной книжкой.
+    NB: Синхронизация при работе нескольких пользователей с одной записной книжкой.
 */
 
 public class Java13 extends HttpServlet {
@@ -41,7 +41,6 @@ public class Java13 extends HttpServlet {
         }
     }
 
-
     @Override
     public void destroy() {
         try {
@@ -50,7 +49,6 @@ public class Java13 extends HttpServlet {
             logger.log(Level.SEVERE, exceptionLiteral, e);
         }
     }
-
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -75,7 +73,6 @@ public class Java13 extends HttpServlet {
                     name = request.getParameter("name");
                     numbers = request.getParameter("numbers");
                     avatar = request.getParameter("avatar");
-
 
                 if (numbers.contains(":")) {
                     nums = numbers.split(":");
@@ -115,7 +112,6 @@ public class Java13 extends HttpServlet {
         }
     }
 
-
     private String generateList() {
         StringBuilder list = new StringBuilder();
 
@@ -125,11 +121,12 @@ public class Java13 extends HttpServlet {
             String name = entry.getKey();
             ArrayList<String> numbers = entry.getValue();
 
-            list.append("<p><img src=\"http://localhost:8080/java-13/data/" + avatars.get(name) + ".jpg\" width=\"50\" height = \"50\">" + name + "</p>");
+            list.append("<p><img src=\"http://localhost:8080/java-13/data/").append(avatars.get(name))
+                    .append(".jpg\" ").append("width=\"50\" height = \"50\">").append(name).append("</p>");
             list.append("<ul style=\"list-style=type:circle\">");
 
             for (String i : numbers) {
-                list.append("<li>" + i + "</li>\n");
+                list.append("<li>").append(i).append("</li>\n");
             }
 
             list.append("</ul>\n");
@@ -139,12 +136,12 @@ public class Java13 extends HttpServlet {
         return list.toString();
     }
 
-
     private String generateForm() {
-        String form =  "<form method=\"GET\" action=\"/java-13/phonebook/add\">\n" +
+        return "<form method=\"GET\" action=\"/java-13/phonebook/add\">\n" +
                 "Name: <input type=\"text\" name=\"name\">\n" +
                 "Number: <input type=\"text\" name=\"numbers\">\n" +
-                "<br>You can add multiple numbers by seperating them with \':\' symbol <br<br>>Chose avatar for new entry or chose new for existing entry" +
+                "<br>You can add multiple numbers by separating them with \':\' symbol <br<br>>Chose avatar for new " +
+                "entry or chose new for existing entry" +
                 "<br>\n" +
                 "<input name=\"avatar\" type=\"radio\" value=\"cj\">" +
                 "<img src=\"http://localhost:8080/java-13/data/cj.jpg\" width=\"100\" height = \"100\"><br>" +
@@ -159,10 +156,8 @@ public class Java13 extends HttpServlet {
                 "<input type=\"submit\" value=\"Submit\"><br>\n" +
                 "</form>\n" +
                 "<a href=\"/java-13/phonebook\">Go back to list</a>\n";
-        return form;
 
     }
-
 
     private synchronized void add(String name, String[] nums) {
         ArrayList<String> numbers;
@@ -179,14 +174,12 @@ public class Java13 extends HttpServlet {
         phoneBook.put(name, numbers);
     }
 
-
     private void load() throws IOException {
         File data = new File("../webapps/java-13/data/data.txt");
 
         if (!data.exists()) {
             logger.log(Level.SEVERE, exceptionLiteral, "Data not found");
         }
-
 
         try (BufferedReader reader = new BufferedReader(new FileReader(data))) {
 
@@ -200,10 +193,8 @@ public class Java13 extends HttpServlet {
 
                 add(name, nums);
             }
-
         }
     }
-
 
     private void save() throws IOException {
         File data = new File("../webapps/java-13/data/data.txt");
@@ -230,10 +221,8 @@ public class Java13 extends HttpServlet {
 
                 writer.write("\n");
             }
-
         }
     }
-
 
     private boolean isNum(String str) {
         for (int i = 0; i < str.length(); i++) {
